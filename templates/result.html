@@ -1,0 +1,47 @@
+<!-- templates/result.html -->
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Kết quả dự đoán</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+  <body class="bg-light">
+    <nav class="navbar navbar-light bg-white shadow-sm">
+      <div class="container">
+        <a class="navbar-brand" href="/">🌸 Phân loại hoa</a>
+      </div>
+    </nav>
+
+    <main class="container py-5">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Kết quả dự đoán</h4>
+
+          <div class="row">
+            <div class="col-md-6">
+              <img src="{{ url_for('uploaded_file', filename=filename) }}" class="img-fluid border" alt="Uploaded image">
+            </div>
+            <div class="col-md-6">
+              <h5 class="mt-2">Loài dự đoán: <span class="badge bg-success">{{ result[0] }}</span></h5>
+              <p>Xác suất: <strong>{{ (result[1]*100)|round(2) }}%</strong></p>
+
+              <h6>Top 5 dự đoán</h6>
+              <ul>
+                {% for name, p in top5 %}
+                  <li>{{ name }} — {{ (p*100)|round(2) }}%</li>
+                {% endfor %}
+              </ul>
+
+              <a href="/" class="btn btn-secondary mt-3">Quay lại</a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
